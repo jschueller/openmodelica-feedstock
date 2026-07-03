@@ -1,0 +1,49 @@
+From 570260c88bb78f47a8ac2cf90360f83684c008b7 Mon Sep 17 00:00:00 2001
+From: linuslangenkamp <linus.langenkamp@fh-bielefeld.de>
+Date: Wed, 24 Jun 2026 11:15:04 +0200
+Subject: [PATCH] [ColPack] replace deprecated std::random_shuffle with
+ std::shuffle
+
+---
+ ColPack/src/SMPGC/SMPGCColoringD1.cpp     | 6 ++++--
+ ColPack/src/SMPGC/SMPGCColoringHybrid.cpp | 3 ++-
+ 2 files changed, 6 insertions(+), 3 deletions(-)
+
+diff --git a/ColPack/src/SMPGC/SMPGCColoringD1.cpp b/ColPack/src/SMPGC/SMPGCColoringD1.cpp
+index 53680db0b..b4a898663 100644
+--- a/OMCompiler/3rdParty/ColPack/src/SMPGC/SMPGCColoringD1.cpp
++++ b/OMCompiler/3rdParty/ColPack/src/SMPGC/SMPGCColoringD1.cpp
+@@ -470,7 +470,8 @@ int SMPGCColoring::D1_OMP_LB(int nT, int&colors, vector<int>&vtxColors, const in
+     tim_Wgt =-omp_get_wtime();
+     vector<int> WeightRnd(N);
+     for(int i=0; i<N; i++) WeightRnd[i]=i;
+-    std::random_shuffle(WeightRnd.begin(), WeightRnd.end());
++    std::default_random_engine g(std::random_device{}());
++    std::shuffle(WeightRnd.begin(), WeightRnd.end(), g);
+     //if(N>1) for(int i=0; i<N-1; i++) { uniform_int_distribution<int> dist(i, N-1); swap(WeightRnd[i], WeightRnd[dist(mt)]); }
+     tim_Wgt +=omp_get_wtime();
+     
+@@ -615,7 +616,8 @@ int SMPGCColoring::D1_OMP_JP(int nT, int&colors, vector<int>&vtxColors, const in
+     tim_Wgt =-omp_get_wtime();
+     vector<int> WeightRnd(N);
+     for(int i=0; i<N; i++) WeightRnd[i]=i;
+-    std::random_shuffle(WeightRnd.begin(), WeightRnd.end());
++    std::default_random_engine g2(std::random_device{}());
++    std::shuffle(WeightRnd.begin(), WeightRnd.end(), g2);
+     //if(N>1) for(int i=0; i<N-1; i++) { uniform_int_distribution<int> dist(i, N-1); swap(WeightRnd[i], WeightRnd[dist(mt)]); }
+     tim_Wgt +=omp_get_wtime();
+     
+diff --git a/ColPack/src/SMPGC/SMPGCColoringHybrid.cpp b/ColPack/src/SMPGC/SMPGCColoringHybrid.cpp
+index 188f7da8a..6443c9281 100644
+--- a/OMCompiler/3rdParty/ColPack/src/SMPGC/SMPGCColoringHybrid.cpp
++++ b/OMCompiler/3rdParty/ColPack/src/SMPGC/SMPGCColoringHybrid.cpp
+@@ -55,7 +55,8 @@ int SMPGCColoring::D1_OMP_HBJP(int nT, int&colors, vector<int>& vtxColors, const
+     tim_Wgt =-omp_get_wtime();
+     vector<int> WeightRnd(N);
+     for(int i=0; i<N; i++) WeightRnd[i]=i;
+-    std::random_shuffle(WeightRnd.begin(), WeightRnd.end());
++    std::default_random_engine g_hybrid(std::random_device{}());
++    std::shuffle(WeightRnd.begin(), WeightRnd.end(), g_hybrid);
+     //if(N>1) for(int i=0; i<N-1; i++) { uniform_int_distribution<int> dist(i, N-1); swap(WeightRnd[i], WeightRnd[dist(mt)]); }
+     tim_Wgt +=omp_get_wtime();
+     

@@ -1,5 +1,5 @@
 context:
-  version: "1.26.9"
+  version: "1.27.0"
 
 package:
   name: openmodelica
@@ -7,24 +7,24 @@ package:
 
 source:
   url: https://github.com/OpenModelica/OpenModelica/releases/download/v${{ version }}/OpenModelica-v${{ version }}-src-with-submodules.zip
-  sha256: 9891ba8233af63b3b503cb0362785089d64402b7894928f5e056521569a2aadc
+  sha256: 8bb23c0ae3dc1e8b2eed84f2ee24b0014ba837015a9230a5e0237d6789071bff 
   patches:
     # drop erroneous _GNU_SOURCE define (error seems specific to conda-forge)
     - fmilib-gnusource.patch
-    # keep compiler path relative for relocation (https://github.com/OpenModelica/OpenModelica/pull/15563)
-    - relative-cc.patch
-    # Add OM_USE_SYSTEM_LIBFFI option (https://github.com/OpenModelica/OMCompiler-3rdParty/pull/209)
-    - 0001-Add-system-libffi-option.patch
-    # RUNTIME_DEPENDENCIES needs FRAMEWORK DESTINATION (https://github.com/OpenModelica/OpenModelica/pull/15569)
-    - framework.patch
     # Add OM_USE_SYSTEM_ZLIB option to fix stdio.h:210:7: error: expected identifier or '(' (updated to zlib 1.3.2 upstream)
     - zlib.patch
-    # dont install under PREFIX/Applications (https://github.com/OpenModelica/OpenModelica/pull/15570)
-    - bundle.patch
-    # drop erroneous -undefined,error linker flag (https://github.com/OpenModelica/OpenModelica/pull/15569)
-    - undefined.patch
     # add macos/aarch64 platforms (https://github.com/robbr48/fmi4c/pull/97)
     - fmi4c.patch
+    # nuke webkit (https://github.com/OpenModelica/OpenModelica/pull/15981)
+    - webkit.patch
+    # boost includes (https://github.com/OpenModelica/OpenModelica/pull/15982)
+    - boost.patch
+    # SyntaxError (https://github.com/OpenModelica/OpenModelica/pull/15983)
+    - syntaxerror.patch
+    # error: no member named 'random_shuffle' in namespace 'std' (https://github.com/OpenModelica/OMCompiler-3rdParty/pull/219)
+    - random_shuffle.patch
+    # ld: unknown option: --no-undefined (https://github.com/OpenModelica/OpenModelica/pull/15990)
+    - undefined.patch
 
 build:
   number: 0
@@ -108,7 +108,6 @@ about:
     - OMCompiler/3rdParty/ryu/LICENSE-Apache2
     - OMCompiler/3rdParty/SuiteSparse-5.8.1/LICENSE.txt
     - OMCompiler/3rdParty/sundials-5.4.0/LICENSE
-    - OMCompiler/3rdParty/tbb/LICENSE
     - OMCompiler/3rdParty/zlib/LICENSE
   summary: The Open Source Modelica Suite
 

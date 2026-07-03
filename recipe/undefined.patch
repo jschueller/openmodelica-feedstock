@@ -1,15 +1,13 @@
 diff --git a/OMCompiler/SimulationRuntime/fmi/export/buildproject/CMakeLists.txt.in b/OMCompiler/SimulationRuntime/fmi/export/buildproject/CMakeLists.txt.in
-index bc8d2683ef..ae6a0d5f92 100644
+index cfca1997fa..56dd4c6c03 100644
 --- a/OMCompiler/SimulationRuntime/fmi/export/buildproject/CMakeLists.txt.in
 +++ b/OMCompiler/SimulationRuntime/fmi/export/buildproject/CMakeLists.txt.in
-@@ -133,9 +133,7 @@ set_target_properties(${FMU_NAME_HASH} PROPERTIES OUTPUT_NAME ${FMU_NAME})
+@@ -160,7 +160,7 @@ set_target_properties(${FMU_NAME_HASH} PROPERTIES OUTPUT_NAME ${FMU_NAME})
  
  # Linker options
  if(NOT ${CMAKE_VERSION} VERSION_LESS "3.13")
--  if(CMAKE_C_COMPILER_ID STREQUAL "Clang" OR CMAKE_C_COMPILER_ID STREQUAL "AppleClang")  # Using Clang
--    target_link_options(${FMU_NAME_HASH} PRIVATE "LINKER:SHELL:-undefined,error")
--  elseif(CMAKE_C_COMPILER_ID STREQUAL "GNU")  # Using GCC
-+  if(CMAKE_C_COMPILER_ID STREQUAL "GNU")  # Using GCC
+-  if(CMAKE_C_COMPILER_ID STREQUAL "GNU" OR CMAKE_C_COMPILER_ID STREQUAL "Clang")
++  if(UNIX AND NOT APPLE)
      target_link_options(${FMU_NAME_HASH} PRIVATE "LINKER:SHELL:--no-undefined")
    endif()
  endif()

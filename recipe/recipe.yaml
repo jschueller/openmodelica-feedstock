@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/OpenModelica/OpenModelica/releases/download/v${{ version }}/OpenModelica-v${{ version }}-src-with-submodules.zip
-  sha256: 8bb23c0ae3dc1e8b2eed84f2ee24b0014ba837015a9230a5e0237d6789071bff 
+  sha256: 8bb23c0ae3dc1e8b2eed84f2ee24b0014ba837015a9230a5e0237d6789071bff
   patches:
     # drop erroneous _GNU_SOURCE define (error seems specific to conda-forge)
     - fmilib-gnusource.patch
@@ -27,7 +27,7 @@ source:
     - undefined.patch
 
 build:
-  number: 0
+  number: 1
   skip:
     - win
 

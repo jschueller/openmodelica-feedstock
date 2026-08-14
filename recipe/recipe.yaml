@@ -25,6 +25,8 @@ source:
     - random_shuffle.patch
     # ld: unknown option: --no-undefined (https://github.com/OpenModelica/OpenModelica/pull/15990)
     - undefined.patch
+    # cc1: error: '-Werror=c23-extensions': no option '-Wc23-extensions (https://github.com/OpenModelica/OpenModelica/pull/16297)
+    - 0001-SimRT-C-Mismatching-clang-flags.patch
 
 build:
   number: 1

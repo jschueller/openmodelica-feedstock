@@ -29,7 +29,7 @@ source:
     - 0001-SimRT-C-Mismatching-clang-flags.patch
 
 build:
-  number: 1
+  number: 2
   skip:
     - win
 

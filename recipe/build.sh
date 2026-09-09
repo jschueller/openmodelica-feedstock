@@ -11,3 +11,7 @@ cmake ${CMAKE_ARGS} -G "Ninja" -LAH \
   -DOM_MACOS_APP_BUNDLE=OFF \
   -B build -S .
 cmake --build build --target install --parallel ${CPU_COUNT}
+
+# https://github.com/OpenModelica/OpenModelica/issues/16649
+test `uname` = "Linux" && rm ${PREFIX}/include/omc/omsicpp/Core/Modelica.h.gch
+test ! -f ${PREFIX}/include/omc/omsicpp/Core/Modelica.h.gch

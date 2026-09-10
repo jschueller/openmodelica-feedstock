@@ -1,5 +1,5 @@
 context:
-  version: "1.27.0"
+  version: "1.27.1"
 
 package:
   name: openmodelica
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/OpenModelica/OpenModelica/releases/download/v${{ version }}/OpenModelica-v${{ version }}-src-with-submodules.zip
-  sha256: 8bb23c0ae3dc1e8b2eed84f2ee24b0014ba837015a9230a5e0237d6789071bff
+  sha256: 4e41ad73b11e47bab5dac54aa83c6bb4edc4a37188ebd93433dee1c02cc17227
   patches:
     # drop erroneous _GNU_SOURCE define (error seems specific to conda-forge)
     - fmilib-gnusource.patch
@@ -15,8 +15,6 @@ source:
     - zlib.patch
     # add macos/aarch64 platforms (https://github.com/robbr48/fmi4c/pull/97)
     - fmi4c.patch
-    # nuke webkit (https://github.com/OpenModelica/OpenModelica/pull/15981)
-    - webkit.patch
     # boost includes (https://github.com/OpenModelica/OpenModelica/pull/15982)
     - boost.patch
     # SyntaxError (https://github.com/OpenModelica/OpenModelica/pull/15983)
@@ -29,7 +27,7 @@ source:
     - 0001-SimRT-C-Mismatching-clang-flags.patch
 
 build:
-  number: 2
+  number: 0
   skip:
     - win
 
